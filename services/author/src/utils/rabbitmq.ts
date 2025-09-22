@@ -46,8 +46,8 @@ export const invalidateCacheJob = async (cacheKeys: string[]) => {
     };
 
     await publishToQueue("cache-invalidation", message);
-    console.log("Cache invalidation job published");
+    console.log("Cache invalidation job published to rabbit");
   } catch (error) {
-    console.log(error, "Failed to publish");
+    console.log(error, "Failed to publish to rabbit");
   }
 };
