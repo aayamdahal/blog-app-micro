@@ -8,11 +8,14 @@ interface BlogsProps {
 
 const HomeLayout: React.FC<BlogsProps> = ({ children }) => {
   return (
-    <div>
+    <div className="bg-muted/30">
       <SidebarProvider>
         <SideBar />
-        <main className="w-full">
-          <div className="w-full min-h-[calc(100vh-45)] px-4">{children}</div>
+        <main className="relative w-full bg-gradient-to-b from-white via-white to-transparent">
+          <div className="absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_top,var(--primary)/12,transparent_70%)]" />
+          <div className="relative z-10 w-full min-h-[calc(100vh-4rem)] px-2 py-6 md:px-6 md:py-10">
+            {children}
+          </div>
         </main>
       </SidebarProvider>
     </div>
