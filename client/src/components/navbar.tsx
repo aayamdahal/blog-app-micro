@@ -14,10 +14,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md p-4 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href={"/blogs"} className="text-xl font-bold text-gray-900">
-          The Reading Retreat
-        </Link>
-
         <div className="md:hidden">
           <Button variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
