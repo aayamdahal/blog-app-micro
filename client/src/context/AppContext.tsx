@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { get } from "http";
 
 export const user_service = "http://localhost:8080";
 export const author_service = "http://localhost:5000";
@@ -67,7 +68,6 @@ interface AppContextType {
   blogLoading: boolean;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   searchQuery: string;
-  category: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   fetchBlogs: () => Promise<void>;
   savedBlogs: SavedBlogType[] | null;
@@ -175,16 +175,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         setCategory,
         setSearchQuery,
         searchQuery,
-        category,
         fetchBlogs,
         savedBlogs,
         getSavedBlogs,
       }}
     >
-      <GoogleOAuthProvider
-        clientId="178165608224-6o145onoc99cl4lcjf0fn5pqg3lnkq03.apps.googleusercontent.com
-"
-      >
+      <GoogleOAuthProvider clientId="178165608224-eih82g8u39qhmt52ieb0f7r16nd0re0b.apps.googleusercontent.com">
         {children}
         <Toaster />
       </GoogleOAuthProvider>

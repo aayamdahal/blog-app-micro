@@ -1,24 +1,13 @@
 "use client";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAppData, User, user_service } from "@/context/AppContext";
-import React, { useEffect, useRef, useState } from "react";
-import Cookies from "js-cookie";
+import { User, user_service } from "@/context/AppContext";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
 import Loading from "@/components/loading";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { redirect, useParams, useRouter } from "next/navigation";
+
+import { useParams } from "next/navigation";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState<User | null>(null);

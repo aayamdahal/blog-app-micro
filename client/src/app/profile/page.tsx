@@ -9,6 +9,9 @@ import toast from "react-hot-toast";
 import Loading from "@/components/loading";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+import { Label } from "@/components/ui/label";
+import { redirect, useRouter } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -16,9 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { redirect, useRouter } from "next/navigation";
 
 const ProfilePage = () => {
   const { user, setUser, logoutUser } = useAppData();
