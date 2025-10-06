@@ -244,31 +244,20 @@ image tags, line breaks, and structural tags exactly as they are. Return the ful
 
   const fullMessage = `${prompt}\n\n${blog}`;
 
-  const ai = new GoogleGenerativeAI(process.env.Gemini_Api_Key as string);
-
-  const model = ai.getGenerativeModel({ model: "gemini-1.5-pro" });
-
-  const result = await model.generateContent({
-    contents: [
-      {
-        role: "user",
-        parts: [
-          {
-            text: fullMessage,
-          },
-        ],
-      },
-    ],
+  const ai = new GoogleGenAI({
+    apiKey: process.env.Gemini_Api_Key,
+  });
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash-001",
+    contents: fullMessage,
   });
 
-  const responseText = await result.response.text();
+  const responseText = response.text ?? "";
 
   const cleanedHtml = responseText
-    .replace(/^(html|```html|```)\n?/i, "")
-    .replace(/```$/i, "")
-    .replace(/\*\*/g, "")
-    .replace(/[\r\n]+/g, "")
-    .replace(/[*_`~]/g, "")
+    .replace(/```html|```/gi, "")
+    .replace(/\n?/g, "")
+    .replace(/[*_~]/g, "")
     .trim();
 
   res.status(200).json({ html: cleanedHtml });
