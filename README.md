@@ -2,7 +2,7 @@
 
 A full-stack blog platform built as a microservice monorepo, combining a Next.js client with three TypeScript/Express services to handle user identities, blog authoring workflows, and high-performance blog delivery. Features Redis caching, RabbitMQ-based cache invalidation, and AI-assisted authoring tools.
 
-**🌐 Live Demo**: [https://blog-app-client-lime-beta.vercel.app/blogs](https://blog-app-client-lime-beta.vercel.app/blogs)
+**🌐 Live Demo**: [https://blog-app-micro-aqog.vercel.app/](https://blog-app-micro-aqog.vercel.app/)
 
 ## 🏗️ Architecture
 
@@ -413,7 +413,7 @@ MIT
 **Aayam Dahal**
 
 - GitHub: [@aayamdahal](https://github.com/aayamdahal)
-- Live Demo: [InkFlow](https://blog-app-client-lime-beta.vercel.app/blogs)
+- Live Demo: [InkFlow](https://blog-app-micro-aqog.vercel.app/)
 
 ## 🤝 Contributing
 
