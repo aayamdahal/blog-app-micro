@@ -4,30 +4,25 @@ let channel: amqp.Channel;
 
 export const connectRabbitMQ = async () => {
   try {
-    const connection = await amqp.connect(
-      "amqp://admin:admin@localhost:5672/app"
-    );
-
-    connection.on("error", (err) => {
-      console.error("RabbitMQ connection error:", err.message);
-    });
-
-    connection.on("close", () => {
-      console.error("RabbitMQ connection closed. Retrying in 5s…");
-      setTimeout(connectRabbitMQ, 5000);
+    const connection = await amqp.connect({
+      protocol: "amqp",
+      hostname: process.env.Rabbimq_Host,
+      port: 5672,
+      username: process.env.Rabbimq_Username,
+      password: process.env.Rabbimq_Password,
     });
 
     channel = await connection.createChannel();
-    console.log("✅ Connected to RabbitMQ");
+
+    console.log("✅ Connected to Rabbitmq");
   } catch (error) {
-    console.error("❌ RabbitMQ failed connection:", error);
-    setTimeout(connectRabbitMQ, 5000);
+    console.error("❌ Failed to connect to Rabbitmq", error);
   }
 };
 
 export const publishToQueue = async (queueName: string, message: any) => {
   if (!channel) {
-    console.error("RabbitMQ channel is not initialized");
+    console.error("Rabbitmq channel is not intialized");
     return;
   }
 
@@ -38,7 +33,7 @@ export const publishToQueue = async (queueName: string, message: any) => {
   });
 };
 
-export const invalidateCacheJob = async (cacheKeys: string[]) => {
+export const invalidateChacheJob = async (cacheKeys: string[]) => {
   try {
     const message = {
       action: "invalidateCache",
@@ -46,8 +41,9 @@ export const invalidateCacheJob = async (cacheKeys: string[]) => {
     };
 
     await publishToQueue("cache-invalidation", message);
-    console.log("Cache invalidation job published to rabbit");
+
+    console.log("✅ Cache invalidation job published to Rabbitmq");
   } catch (error) {
-    console.log(error, "Failed to publish to rabbit");
+    console.error("❌ Failed to Publish cache on Rabbitmq", error);
   }
 };

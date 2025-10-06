@@ -2,12 +2,12 @@ import mongoose, { Schema } from "mongoose";
 const schema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     image: {
         type: String,
@@ -16,9 +16,9 @@ const schema = new Schema({
     instagram: String,
     facebook: String,
     linkedin: String,
-    bio: String
+    bio: String,
 }, {
-    timestamps: true
+    timestamps: true,
 });
 const User = mongoose.model("User", schema);
 export default User;

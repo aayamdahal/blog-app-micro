@@ -1,20 +1,28 @@
 import jwt from "jsonwebtoken";
-export async function isAuth(req, res, next) {
+export const isAuth = async (req, res, next) => {
     try {
-        const authHeader = req.get("authorization");
-        if (!authHeader?.startsWith("Bearer ")) {
-            return res.status(401).json({ message: "Please login - No auth header" });
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            res.status(401).json({
+                message: "Please Login - No auth header",
+            });
+            return;
         }
-        const token = authHeader.slice(7).trim();
-        const decoded = jwt.verify(token, process.env.JWT_SEC);
-        if (!decoded || !decoded.user) {
-            return res.status(401).json({ message: "Invalid Token" });
+        const token = authHeader.split(" ")[1];
+        const decodeValue = jwt.verify(token, process.env.JWT_SEC);
+        if (!decodeValue || !decodeValue.user) {
+            res.status(401).json({
+                message: "Invalid token",
+            });
+            return;
         }
-        req.user = decoded.user;
-        return next();
+        req.user = decodeValue.user;
+        next();
     }
-    catch (err) {
-        console.error("JWT verification error:", err);
-        return res.status(401).json({ message: "Invalid/expired token" });
+    catch (error) {
+        console.log("JWT verification error: ", error);
+        res.status(401).json({
+            message: "Please Login - Jwt error",
+        });
     }
-}
+};
