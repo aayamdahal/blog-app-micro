@@ -2,7 +2,6 @@ import getBuffer from "../utils/dataUri.js";
 import { sql } from "../utils/db.js";
 import TryCatch from "../utils/TryCatch.js";
 import cloudinary from "cloudinary";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenAI } from "@google/genai";
 export const createBlog = TryCatch(async (req, res) => {
     const { title, description, blogcontent, category } = req.body;
@@ -165,21 +164,14 @@ image tags, line breaks, and structural tags exactly as they are. Return the ful
         return;
     }
     const fullMessage = `${prompt}\n\n${blog}`;
-    const ai = new GoogleGenerativeAI(process.env.Gemini_Api_Key);
-    const model = ai.getGenerativeModel({ model: "gemini-1.5-pro" });
-    const result = await model.generateContent({
-        contents: [
-            {
-                role: "user",
-                parts: [
-                    {
-                        text: fullMessage,
-                    },
-                ],
-            },
-        ],
+    const ai = new GoogleGenAI({
+        apiKey: process.env.Gemini_Api_Key,
     });
-    const responseText = await result.response.text();
+    const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash-exp",
+        contents: fullMessage,
+    });
+    const responseText = response.text;
     const cleanedHtml = responseText
         .replace(/^(html|```html|```)\n?/i, "")
         .replace(/```$/i, "")

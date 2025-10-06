@@ -245,7 +245,7 @@ const AddBlog = () => {
               <div className="flex justify-between items-center mb-2">
                 <p className="text-sm text-muted-foreground">
                   Paste you blog or type here. You can use rich text formatting.
-                  Please add image after improving your grammer
+                  Please add image after improving your grammar
                 </p>
                 <Button
                   type="button"
@@ -257,7 +257,7 @@ const AddBlog = () => {
                     size={16}
                     className={aiBlogLoading ? "animate-spin" : ""}
                   />
-                  <span className="ml-2">Fix Grammer</span>
+                  <span className="ml-2">Fix grammar</span>
                 </Button>
               </div>
               <JoditEditor
