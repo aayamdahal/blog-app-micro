@@ -128,3 +128,7 @@ export const updatedProfilePic = TryCatch(async (req, res) => {
     user,
   });
 });
+
+export const aiTitleResponse = TryCatch(async (req, res) => {
+  const { text } = req.body;
+});
